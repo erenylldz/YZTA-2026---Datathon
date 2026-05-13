@@ -1,5 +1,32 @@
-venv/
-.venv/
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
+env/
+
+# Jupyter
 .ipynb_checkpoints/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# CatBoost logs
+catboost_info/
+
+# Data and generated outputs
+data/
+outputs/
+models/
+
+# Intermediate prediction files
+*.npy
+*.pkl
+*.joblib
+
+# Environment
+.env
