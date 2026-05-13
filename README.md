@@ -1,5 +1,3 @@
-# YZTA-2026---Datathon
-
 # 🧠 YZTA 2026 Datathon  
 ## Sleep & Cognitive Performance Analysis
 
