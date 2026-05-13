@@ -1,26 +1,28 @@
 # YZTA-2026---Datathon
-Dataset Overview
+Sleep & Cognitive Performance Dataset Analysis
+Project Overview
 
-This dataset is a synthetic tabular dataset designed to investigate the relationship between individuals’ sleep habits, lifestyle characteristics, physiological and psychological conditions, and cognitive performance levels. Each observation in the dataset represents a single individual and includes a combination of demographic, behavioral, sleep-related, and health-related variables.
+This project focuses on the exploratory analysis of a synthetic tabular dataset designed to investigate the relationship between sleep behavior, lifestyle habits, physiological characteristics, psychological conditions, and cognitive performance levels.
 
-The primary objective of the dataset is to analyze how different sleep behaviors and daily lifestyle patterns may influence cognitive performance. The target variable of the dataset is bilissel_performans_skoru, a continuous numerical variable representing an individual’s cognitive performance score on a scale between 0 and 10.
+The dataset contains individual-level observations including demographic information, sleep-related measurements, behavioral variables, and health indicators. The primary objective is to examine how different sleep and lifestyle factors may be associated with cognitive performance outcomes.
 
-The dataset consists of:
+The target variable of the dataset is:
 
-Training set: 56,000 observations
-Test set: 24,000 observations
+bilissel_performans_skoru
 
-The training dataset includes the target variable, whereas the test dataset does not contain target information.
+which represents a continuous cognitive performance score ranging from 0 to 10.
 
+Dataset Structure
+Dataset	Rows	Columns
+Train	56,000	24
+Test	24,000	23
+The training dataset contains the target variable.
+The test dataset does not contain target information.
+Each observation represents one individual participant.
 Variable Categories
-
-The dataset contains variables belonging to several different categories.
-
 Demographic Variables
 
-These variables describe the general characteristics of individuals.
-
-Examples:
+Variables describing participant characteristics:
 
 yas
 cinsiyet
@@ -28,9 +30,7 @@ ulke
 meslek
 Sleep-Related Variables
 
-These variables describe sleep quality and sleep behavior patterns.
-
-Examples:
+Variables associated with sleep quality and sleep behavior:
 
 rem_yuzdesi
 derin_uyku_yuzdesi
@@ -39,17 +39,15 @@ gecelik_uyanma_sayisi
 hafta_sonu_uyku_farki_saat
 kronotip
 
-These variables provide information regarding:
+These variables describe:
 
 sleep efficiency,
+sleep continuity,
 sleep fragmentation,
-circadian rhythm tendencies,
-recovery quality.
+circadian rhythm patterns.
 Lifestyle Variables
 
-These variables reflect daily routines and behavioral habits.
-
-Examples:
+Variables representing daily behavioral habits:
 
 uyku_oncesi_ekran_suresi_dk
 uyku_oncesi_kafein_mg
@@ -57,18 +55,16 @@ gunluk_calisma_saati
 gunluk_adim_sayisi
 gun_tipi
 
-These features help evaluate:
+These features provide information regarding:
 
-screen exposure before sleep,
+screen exposure,
 caffeine consumption,
-physical activity levels,
 work intensity,
-weekday/weekend behavioral differences.
+physical activity,
+weekday/weekend differences.
 Physiological and Psychological Variables
 
-These variables represent physical and mental health indicators.
-
-Examples:
+Variables describing physical and mental condition:
 
 stres_skoru
 ruh_sagligi_durumu
@@ -77,103 +73,213 @@ vucut_kitle_indeksi
 
 These variables may reflect:
 
-stress levels,
+stress level,
 cardiovascular condition,
 body composition,
 psychological well-being.
 Exploratory Data Analysis (EDA)
 
-An extensive exploratory data analysis (EDA) process was conducted in order to better understand the structural characteristics of the dataset before preprocessing and modeling stages.
+A comprehensive exploratory data analysis (EDA) process was conducted before preprocessing and modeling stages in order to better understand the statistical and structural properties of the dataset.
 
-The EDA process included:
+The EDA workflow included:
 
-dataset shape and variable type examination,
-missing value analysis,
+dataset shape examination,
+variable type analysis,
+descriptive statistics,
 duplicate observation checks,
-distribution analysis of numerical variables,
-categorical variable frequency analysis,
-outlier detection,
-train-test distribution consistency checks,
+missing value analysis,
+numerical distribution analysis,
+categorical frequency analysis,
+outlier diagnostics,
 target variable analysis,
 correlation analysis,
-feature relationship exploration.
+train-test consistency analysis.
+Data Structure Examination
+
+Initial analysis focused on understanding the overall structure of the dataset.
+
+The following controls were performed:
+
+dataset dimensions,
+variable data types,
+numerical/categorical feature separation,
+duplicate row checks,
+train-test feature consistency checks.
+
+The dataset contains a mixture of:
+
+continuous numerical variables,
+categorical variables,
+binary-type indicators.
+
+No duplicated observations were detected in the training dataset.
+
+Descriptive Statistical Analysis
+
+Descriptive statistics were computed for all numerical variables.
+
+The analysis included:
+
+mean,
+median,
+standard deviation,
+quartiles,
+minimum and maximum values.
+
+Several behavioral variables displayed positively skewed distributions, particularly:
+
+uyku_oncesi_kafein_mg
+uyku_oncesi_ekran_suresi_dk
+sekerleme_suresi_dk
+
+The target variable (bilissel_performans_skoru) showed:
+
+bounded distribution between 0 and 10,
+moderate variability,
+approximately continuous structure.
 Missing Value Analysis
 
-Missing value analysis showed that several variables contained a relatively small proportion of missing observations. The columns with missing values were:
+Missing value analysis identified incomplete observations in several variables.
 
-kronotip
-vucut_kitle_indeksi
-stres_skoru
-uyku_oncesi_kafein_mg
-meslek
-ruh_sagligi_durumu
+Variable	Approximate Missing Rate
+kronotip	~3.5%
+vucut_kitle_indeksi	~3.1%
+stres_skoru	~3.1%
+uyku_oncesi_kafein_mg	~2.6%
+meslek	~2.5%
+ruh_sagligi_durumu	~2.0%
 
-The missing value ratios were generally between approximately 2% and 4%, indicating that the dataset remained largely complete.
+The analysis included:
 
-During EDA, both numerical summaries and visual inspections were performed to understand missingness patterns across variables. In addition, row-level missing value counts were examined to determine whether missing observations accumulated in specific records.
+feature-level missingness,
+row-level missing counts,
+missing value co-occurrence patterns,
+train-test missing value comparisons.
 
-Because the missing value proportions were relatively low, row or column deletion strategies were not preferred in order to avoid unnecessary information loss.
+The overall missingness level remained relatively low. Therefore, row or column deletion strategies were not preferred in order to minimize information loss.
 
-Outlier Analysis
+Numerical Distribution Analysis
 
-Potential outlier observations were examined particularly for numerical variables related to:
-
-caffeine consumption,
-screen time before sleep,
-stress score,
-sleep latency,
-nap duration.
-
-Boxplots and distribution visualizations were used to identify extreme observations and investigate distributional skewness. The analysis showed that some behavioral variables exhibited right-skewed distributions and contained unusually large values.
-
-At the exploratory stage, outlier analysis was performed diagnostically rather than directly removing observations. This approach allowed the preservation of potentially meaningful behavioral variability while still identifying variables that might require preprocessing adjustments later.
-
-Distribution Analysis
-
-The distributions of numerical variables were analyzed using:
+Distribution analysis was conducted using:
 
 histograms,
-kernel density plots,
+kernel density estimation (KDE),
 boxplots.
 
-These analyses revealed that several variables displayed non-normal and skewed distributions, particularly variables associated with lifestyle behaviors and sleep habits.
+Several variables demonstrated:
 
-The target variable, bilissel_performans_skoru, was also examined to understand its overall distribution and variability across observations.
+non-normal distributions,
+positive skewness,
+long upper tails.
 
-Correlation and Relationship Analysis
+Behavioral variables related to lifestyle habits showed higher variance compared to demographic variables.
 
-Correlation analysis was conducted to investigate linear relationships between numerical variables and the target variable.
+The target variable distribution was also examined to evaluate:
 
-The analysis particularly focused on variables associated with:
+central tendency,
+variability,
+potential imbalance,
+extreme target regions.
+Outlier Diagnostics
 
-stress,
-sleep quality,
-sleep disruption,
-physical activity,
-recovery indicators.
+Potential outlier observations were investigated using:
 
-Additionally, feature relationship exploration was performed through pairwise visualizations and grouped analyses to better understand possible interactions between behavioral and physiological variables.
+boxplot visualizations,
+IQR-based outlier analysis,
+distributional inspection.
 
+Variables with relatively higher outlier ratios included:
+
+Variable	Approximate IQR Outlier Rate
+uyku_oncesi_kafein_mg	~6.2%
+uyku_oncesi_ekran_suresi_dk	~5.9%
+stres_skoru	~1.8%
+uykuya_dalma_suresi_dk	~1.0%
+
+The analysis showed that several behavioral variables contained large upper-tail observations.
+
+Outlier analysis was performed diagnostically before preprocessing decisions in order to preserve potentially meaningful behavioral variability.
+
+Correlation Analysis
+
+Pearson correlation analysis was conducted to investigate linear relationships between numerical variables and the target variable.
+
+Variables showing relatively stronger associations with cognitive performance included:
+
+Variable	Approximate Correlation
+stres_skoru	-0.59
+rem_yuzdesi	0.44
+gunluk_calisma_saati	-0.34
+derin_uyku_yuzdesi	0.28
+gecelik_uyanma_sayisi	-0.27
+
+The analysis suggested that:
+
+higher stress levels,
+sleep fragmentation,
+longer work duration
+
+were negatively associated with cognitive performance.
+
+In contrast:
+
+higher REM sleep percentage,
+higher deep sleep percentage
+
+showed positive associations with cognitive performance scores.
+
+Categorical Variable Analysis
+
+Categorical feature analysis included:
+
+frequency distributions,
+category balance examination,
+train-test category consistency checks.
+
+The analysis showed that:
+
+category distributions were generally balanced,
+train and test datasets shared similar categorical structures,
+no major unseen category issue existed between datasets.
 Train-Test Consistency Analysis
 
-Train and test datasets were compared to evaluate potential distributional differences between the two sets.
+Train and test datasets were compared to evaluate possible distributional differences.
 
-This analysis included:
+The comparison included:
 
-numerical distribution comparisons,
-categorical level consistency checks,
-missing value pattern comparisons.
+KDE distribution comparisons,
+missing value pattern comparisons,
+categorical level consistency analysis.
 
-The results indicated that the train and test datasets generally shared similar structural properties, suggesting that no major distribution shift existed between the two datasets.
+The distributions of major numerical variables appeared structurally similar across train and test datasets, indicating the absence of severe distribution shift.
 
-General Characteristics of the Dataset
+Statistical Characteristics of the Dataset
 
-Overall, the dataset provides a rich multivariate structure containing:
+The dataset exhibits several important statistical properties:
 
-numerical variables,
-categorical variables,
-behavioral indicators,
-physiological measurements,
-psychological factors.
+mixed numerical and categorical structure,
+moderate missingness,
+positively skewed behavioral variables,
+bounded continuous target variable,
+moderate outlier presence,
+potential interaction effects between sleep and lifestyle variables.
 
-The dataset combines information from multiple domains related to sleep, health, and lifestyle, making it suitable for comprehensive exploratory analysis and predictive modeling studies focused on cognitive performance.
+The dataset structure is suitable for:
+
+exploratory statistical analysis,
+behavioral pattern analysis,
+feature engineering,
+predictive modeling applications,
+multivariate analysis studies.
+General Conclusion
+
+The exploratory data analysis demonstrated that the dataset contains meaningful variability across sleep behavior, lifestyle habits, physiological characteristics, and psychological indicators.
+
+The dataset maintains:
+
+relatively low missingness,
+manageable outlier levels,
+consistent train-test distributions,
+moderate feature diversity.
+
+Overall, the dataset provides a statistically rich framework for investigating the relationship between sleep quality, behavioral habits, and cognitive performance outcomes.
